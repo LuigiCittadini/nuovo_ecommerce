@@ -1,18 +1,18 @@
 package it.exolab.jdbc.model;
 
-public class OrdineModel {
+public class Ordine {
 	private int numOrdine;
 	private String clienteId;
-	private String prodottoId;
 	private Stato stato;
-	private int quantita;
-	public OrdineModel(int numOrdine, String clienteId, String prodottoId, Stato stato, int quantita) {
+	private double saldo;
+	
+	public Ordine(int numOrdine, String clienteId, Stato stato, double saldo) {
 		super();
 		this.numOrdine = numOrdine;
 		this.clienteId = clienteId;
-		this.prodottoId = prodottoId;
 		this.stato = stato;
-		this.quantita = quantita;
+		this.saldo = saldo;
+		
 	}
 	public int getNumOrdine() {
 		return numOrdine;
@@ -26,23 +26,17 @@ public class OrdineModel {
 	public void setClienteId(String clienteId) {
 		this.clienteId = clienteId;
 	}
-	public String getProdottoId() {
-		return prodottoId;
-	}
-	public void setProdottoId(String prodottoId) {
-		this.prodottoId = prodottoId;
-	}
 	public Stato getStato() {
 		return stato;
 	}
 	public void setStato(Stato stato) {
 		this.stato = stato;
 	}
-	public int getQuantita() {
-		return quantita;
+	public double getSaldo() {
+		return saldo;
 	}
-	public void setQuantita(int quantita) {
-		this.quantita = quantita;
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
 	}
 	
 	

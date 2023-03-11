@@ -1,30 +1,31 @@
 package it.exolab.jdbc.model;
 
-public class ProdottoModel {
-	private String ProdottoId;
-	private String Descrizione;
+public class Prodotto {
+	private String prodottoId;
+	private String descrizione;
 	private int quantita;
 	private double prezzo;
-	private String Collocazione;
-	public ProdottoModel(String prodottoId, String descrizione, int quantita, double prezzo, String collocazione) {
+	private String collocazione;
+	
+	public Prodotto(String prodottoId, String descrizione, int quantita, double prezzo, String collocazione) {
 		super();
-		ProdottoId = prodottoId;
-		Descrizione = descrizione;
+		this.prodottoId = prodottoId;
+		this.descrizione = descrizione;
 		this.quantita = quantita;
 		this.prezzo = prezzo;
-		Collocazione = collocazione;
+		this.collocazione = collocazione;
 	}
 	public String getProdottoId() {
-		return ProdottoId;
+		return prodottoId;
 	}
 	public void setProdottoId(String prodottoId) {
-		ProdottoId = prodottoId;
+		this.prodottoId = prodottoId;
 	}
 	public String getDescrizione() {
-		return Descrizione;
+		return descrizione;
 	}
 	public void setDescrizione(String descrizione) {
-		Descrizione = descrizione;
+		this.descrizione = descrizione;
 	}
 	public int getQuantita() {
 		return quantita;
@@ -39,10 +40,10 @@ public class ProdottoModel {
 		this.prezzo = prezzo;
 	}
 	public String getCollocazione() {
-		return Collocazione;
+		return collocazione;
 	}
 	public void setCollocazione(String collocazione) {
-		Collocazione = collocazione;
+		this.collocazione = collocazione;
 	}
 	
 	

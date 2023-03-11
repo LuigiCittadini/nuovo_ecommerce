@@ -1,21 +1,21 @@
 package it.exolab.jdbc.model;
 
-public class ClienteModel {
+public class Cliente {
    private String clienteId;
-   private String Nome;
-   private String Cognome;
-   private String Email;
-   private String Indirizzo;
-   private String Password;
+   private String nome;
+   private String cognome;
+   private String email;
+   private String indirizzo;
+   private String password;
 
-   public ClienteModel(String clienteId, String nome, String cognome, String email, String indirizzo, String password) {
+   public Cliente(String clienteId, String nome, String cognome, String email, String indirizzo, String password) {
 	super();
 	this.clienteId = clienteId;
-	Nome = nome;
-	Cognome = cognome;
-	Email = email;
-	Indirizzo = indirizzo;
-	Password = password;
+	this.nome = nome;
+	this.cognome = cognome;
+	this.email = email;
+	this.indirizzo = indirizzo;
+	this.password = password;
 }
 
 public String getClienteId() {
@@ -27,43 +27,43 @@ public void setClienteId(String clienteId) {
 }
 
 public String getNome() {
-	return Nome;
+	return nome;
 }
 
 public void setNome(String nome) {
-	Nome = nome;
+	this.nome = nome;
 }
 
 public String getCognome() {
-	return Cognome;
+	return cognome;
 }
 
 public void setCognome(String cognome) {
-	Cognome = cognome;
+	this.cognome = cognome;
 }
 
 public String getEmail() {
-	return Email;
+	return email;
 }
 
 public void setEmail(String email) {
-	Email = email;
+	this.email = email;
 }
 
 public String getIndirizzo() {
-	return Indirizzo;
+	return indirizzo;
 }
 
 public void setIndirizzo(String indirizzo) {
-	Indirizzo = indirizzo;
+	this.indirizzo = indirizzo;
 }
 
 public String getPassword() {
-	return Password;
+	return password;
 }
 
 public void setPassword(String password) {
-	Password = password;
+	this.password = password;
 }
    
    
