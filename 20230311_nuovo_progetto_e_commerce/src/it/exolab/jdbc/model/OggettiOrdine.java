@@ -56,7 +56,4 @@ public class OggettiOrdine {
 	public void setCostoTotale(double costoTotale) {
 		this.costoTotale = costoTotale;
 	}
-	
-	
-
 }

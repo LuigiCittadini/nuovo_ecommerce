@@ -7,12 +7,16 @@ import it.exolab.jdbc.service.DAOCliente;
 
 public class ClienteController {
 	
+	
 	public void insertCliente(Cliente cliente) {
+
+		//questo metodo inserisce un cliente nel database e da un codice id casuale ad esso
 		
-		String codiceId = "";
+		String codiceId;
 		DAOCliente clienteDAO = new DAOCliente();
 		try {
 			do {
+				codiceId = "";
 				for ( int i = 0; i < 3; i++ ) {
 					char primaParte = (char)((Math.random() * 25) + 98);
 					codiceId += primaParte;

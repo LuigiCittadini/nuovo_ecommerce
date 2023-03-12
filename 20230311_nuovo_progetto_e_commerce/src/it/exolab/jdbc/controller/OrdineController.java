@@ -25,7 +25,10 @@ public class OrdineController {
 		return null;
 	}
 	
+	
 	public void insertOrdine(Ordine ordine) {
+		
+		//questo metodo inserisce un ordine nel database e incrementa il numero dell' ordine.
 		
 		DAOOrdine ordineDAO = new DAOOrdine();
 		try {
