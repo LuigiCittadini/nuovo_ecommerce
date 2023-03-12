@@ -3,11 +3,12 @@ package it.exolab.jdbc.controller;
 import java.sql.SQLException;
 
 import it.exolab.jdbc.model.Ordine;
+import it.exolab.jdbc.model.Prodotto;
 import it.exolab.jdbc.model.Stato;
 import it.exolab.jdbc.service.DAOOrdine;
 
 public class OrdineController {
-	
+			
 	public Stato convertiStatoOrdine(String stato ) {
 		
 		switch (stato) {
@@ -44,6 +45,10 @@ public class OrdineController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
+	}
+	
+	public void aggiungiProdotto(Prodotto prodotto, int quantita) {
+		
 	}
 	
 }

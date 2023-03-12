@@ -25,7 +25,7 @@ public class ClienteController {
 					int secondaParte = (int)(Math.random() * 10 );
 					codiceId += secondaParte;
 				}			
-			}while( !clienteDAO.controllaCodiceId(codiceId) );
+			}while( !clienteDAO.controllaId(codiceId) );
 			cliente.setClienteId(codiceId);
 			clienteDAO.insertCliente(cliente);
 		} catch (ClassNotFoundException e) {

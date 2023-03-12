@@ -46,7 +46,7 @@ public class DAOCliente {
 		return listaClienti;
 	}
 
-	public boolean controllaCodiceId(String codiceId) throws ClassNotFoundException, SQLException {
+	public boolean controllaId(String codiceId) throws ClassNotFoundException, SQLException {
 
 		String query = "SELECT CLIENTE_ID FROM CLIENTI WHERE CLIENTE_ID =" + codiceId;
 		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);

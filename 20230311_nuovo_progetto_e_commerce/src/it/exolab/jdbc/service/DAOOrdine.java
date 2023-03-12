@@ -47,9 +47,11 @@ public class DAOOrdine {
 			listaOrdini.add(ordine);
 		}
 		return listaOrdini;
-	}
+	}	
 	
 	public int getUltimoProgressivo() throws ClassNotFoundException, SQLException {
+	
+		// questo metodo ritorna l' ultimo numero ordine inserito
 		
 		String query = "SELEC MAX(NUM_ORDINE) FROM ORDINI";
 		
