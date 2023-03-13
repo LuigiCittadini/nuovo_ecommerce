@@ -96,6 +96,7 @@ public class ClienteController {
 			cv.rispostaAggiuntaProdotto();
 			risposta = scanner.nextLine();
 		}while ( risposta.equalsIgnoreCase("s") );
+		oc.insertOrdine(null);
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
