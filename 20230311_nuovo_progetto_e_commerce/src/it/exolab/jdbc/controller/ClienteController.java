@@ -15,6 +15,8 @@ public class ClienteController {
 	Scanner scanner = new Scanner(System.in);
 	
 	DAOCliente clienteDAO = new DAOCliente();
+	ClienteView cv = new ClienteView();
+
 	
 	public void insertCliente(Cliente cliente) {
 
@@ -42,16 +44,6 @@ public class ClienteController {
 		}		
 	}
 	
-	public boolean controllaAccesso(String email, String password) {
-		try {
-			return clienteDAO.controllaAccesso(email, password);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 	
 	public boolean verificaEmail(String email) {
 		
@@ -77,7 +69,6 @@ public class ClienteController {
 	private void aquisto() {
 		try {
 			String risposta = "";
-			ClienteView cv = new ClienteView();
 			OrdineController oc = new OrdineController();
 			DAOProdotto prodottoDAO = new DAOProdotto(); 
 		do {
@@ -103,6 +94,48 @@ public class ClienteController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
+	
+	public boolean controllaAccesso(String email, String password) {
+		try {
+			return clienteDAO.controllaAccesso(email, password);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public void accessoCliente() {
+		String email = "";
+		String password = "";		
+		do {
+			cv.messaggioVerificaEmail();
+			email = scanner.nextLine();
+			cv.messaggioVerificaPassword();
+			password = scanner.nextLine();
+			if ( !controllaAccesso(email, password)) {
+				cv.messaggioCredenzialiErrate();
+			}
+		}while (!controllaAccesso(email, password));
+		cv.messaggioCredenzialiEsatte();
+		apriMenuCliente();
+	}
+	
+	public void apriMenuCliente() {
+		cv.menuCliente();
+		controllaSceltaMenuCliente();
+	}
+	
+	public void controllaSceltaMenuCliente() {
+		int scelta = scanner.nextInt();		
+		while ( scelta < 0 || scelta > 2 ) {
+			cv.erroreSceltaMenuCliente();
+			scelta = scanner.nextInt();
+		}
+		sceltaMenuCliente(scelta);		
+	}
+	
+	
 }

@@ -5,8 +5,10 @@ import it.exolab.jdbc.view.ProgrammaView;
 
 public class ProgrammaController {
 	
-	ProgrammaView pv = new ProgrammaView();	
+	ProgrammaView pv = new ProgrammaView();
+	ClienteController cc = new ClienteController();
 	ClienteView cv = new ClienteView();
+	
 	public void start() {
 	pv.menu();
 	}
@@ -15,7 +17,7 @@ public class ProgrammaController {
 		
 		switch (scelta) {
 		case 1:
-			cv.menuCliente();
+			cc.accessoCliente();;
 			break;
 		case 2: 
 			

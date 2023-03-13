@@ -11,40 +11,37 @@ import it.exolab.jdbc.model.Prodotto;
 public class ClienteView {
 	
 	Scanner scanner = new Scanner(System.in);
-	ClienteController cc = new ClienteController();
+	
 	
 	
 	public void messaggioVerificaEmail() {
 		
 		System.out.println("INSERISCI EMAIL");
-		
-		if( cc.controllaAccesso(email, password)) {
-			System.out.println("ACCESSO ESEGUITO CON SUCCESSO");
-			menuClienteBis();
-			
-		}
-		else {
-			System.out.println("ACCESSO NON VALIDO");
-		}		
+				
 	}
 	public void messaggioVerificaPassword() {
 		System.out.println("INSERISCI PASSWORD");
 	}
+	public void messaggioCredenzialiErrate() {
+		System.out.println("ACCESSO NON VALIDO");
+	}
+	public void messaggioCredenzialiEsatte() {
+		System.out.println("ACCESSO ESEGUITO CON SUCCESSO");
+	}
 	
-	public void menuClienteBis() {
+	public void menuCliente() {
+		ClienteController cc = new ClienteController();
 		System.out.println("1 - ORDINA PRODOTTI");
 		System.out.println("2 - VISUALIZZA ORDINE");
-		System.out.println("0 - INDIETRO");
-		int sceltaBis = scanner.nextInt();
-		while ( sceltaBis < 0 || sceltaBis > 2 ) {
-			System.out.println("SCELTA ERRATA. DIGITA UNA SCELTA CORRETTA");
-			sceltaBis = scanner.nextInt();
-		}
-		cc.sceltaMenuCliente(sceltaBis);
-		
+		System.out.println("0 - INDIETRO");		
+	}
+	
+	public void erroreSceltaMenuCliente(){
+		System.out.println("SCELTA ERRATA. DIGITA UNA SCELTA CORRETTA");
 	}
 	
 	public void registrazione() {
+		ClienteController cc = new ClienteController();
 		System.out.println("INSERISCI LA TUA EMAIL");
 		String email = scanner.nextLine();
 		if ( cc.verificaEmail(email)) {
@@ -79,6 +76,7 @@ public class ClienteView {
 		}
 		System.out.println("INSERISCI L'INDICE DEL PRODOTTO");
 	}
+	
 	public void scegliquantità (boolean quantitaCorretta) {	
 		if ( quantitaCorretta ) {
 			System.out.println("QUANTI NE VUOI AQUISTARE?");			
