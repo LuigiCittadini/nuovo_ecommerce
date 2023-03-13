@@ -10,15 +10,15 @@ import it.exolab.jdbc.model.OggettiOrdine;
 
 public class DAOOggettiOrdine {
 
-	public void insertOggettiOrdine(OggettiOrdine oggettiOrdine) throws ClassNotFoundException, SQLException {
+	public void insertOggettiOrdine(OggettiOrdine oggettoOrdine) throws ClassNotFoundException, SQLException {
 
 		String query = "INSERT INTO OGGETTI_ORDINE(NUM_ORDINE, OGGETTO#, PRODOTTO_ID, NUM_PRODOTTI, COSTO_TOT)" + "values(?,?,?,?,?)";
 		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
-		stmt.setInt(1, oggettiOrdine.getNumeroOrdine());
-		stmt.setInt(2, oggettiOrdine.getNumerooOggetto());
-		stmt.setString(3, oggettiOrdine.getProdottoId());
-		stmt.setInt(4, oggettiOrdine.getNumeroProdotti());
-		stmt.setDouble(5, oggettiOrdine.getCostoTotale());
+		stmt.setInt(1, oggettoOrdine.getNumeroOrdine());
+		stmt.setInt(2, oggettoOrdine.getNumerooOggetto());
+		stmt.setString(3, oggettoOrdine.getProdottoId());
+		stmt.setInt(4, oggettoOrdine.getNumeroProdotti());
+		stmt.setDouble(5, oggettoOrdine.getCostoTotale());
 		stmt.execute();
 		DAOService.getInstance().closeConnection();
 	}

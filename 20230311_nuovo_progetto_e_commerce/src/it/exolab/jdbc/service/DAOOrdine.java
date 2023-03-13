@@ -12,8 +12,6 @@ import it.exolab.jdbc.model.Stato;
 
 public class DAOOrdine {
 	
-	OrdineController oc = new OrdineController();
-	
 	public void insertOrdine(Ordine ordine) throws ClassNotFoundException, SQLException {
 		
 		String query = "INSERT INTO ORDINI(NUM_ORDINE, CLIENTE_ID, STATO, SALDO)" + "values(?,?,?,?)";
@@ -41,7 +39,7 @@ public class DAOOrdine {
 			int num_ordine = rs.getInt("NUM_ORDINE");
 			String cliente_id = rs.getString("CLIENTE_ID");
 			String st = rs.getString("STATO");
-			Stato stato = oc.convertiStatoOrdine(st); // trasforma la stringa in un enum
+			Stato stato = OrdineController.convertiStatoOrdine(st); // trasforma la stringa in un enum
 			double saldo = rs.getInt("SALDO");
 			Ordine ordine = new Ordine(num_ordine, cliente_id, stato, saldo);
 			listaOrdini.add(ordine);
@@ -53,7 +51,7 @@ public class DAOOrdine {
 	
 		// questo metodo ritorna l' ultimo numero ordine inserito
 		
-		String query = "SELEC MAX(NUM_ORDINE) FROM ORDINI";
+		String query = "SELECT MAX(NUM_ORDINE) FROM ORDINI";
 		
 		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
 		ResultSet rs = stmt.executeQuery(query);
