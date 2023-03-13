@@ -20,9 +20,9 @@ public class ProgrammaView {
 		System.out.println("0 - ESCI");
 		
 		int scelta = scanner.nextInt();
-		pc.scelta(scelta);
-		
-		
+		pc.scelta(scelta);		
 	}
+	
+	
 
 }

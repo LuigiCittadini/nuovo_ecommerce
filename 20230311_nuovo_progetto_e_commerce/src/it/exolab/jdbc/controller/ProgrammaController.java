@@ -17,6 +17,11 @@ public class ProgrammaController {
 		case 1:
 			cv.menuCliente();
 			break;
+		case 2: 
+			
+			break;
+		case 3: 
+			cv.registrazione();
 		}
 	}
 

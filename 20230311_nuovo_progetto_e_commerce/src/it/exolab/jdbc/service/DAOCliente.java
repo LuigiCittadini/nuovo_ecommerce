@@ -65,22 +65,27 @@ public class DAOCliente {
 	
 	public boolean controllaAccesso(String email, String password) throws ClassNotFoundException, SQLException {
 		
+		String query = "SELECT EMAIL, PASSWORD FROM CLIENTI WHERE EMAIL = '" + email + "'";
+		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
+		ResultSet rs = stmt.executeQuery(query);
+		while (rs.next()) {
+			if (rs.getString("EMAIL").equals(email) && rs.getString("PASSWORD").equals(password)) {
+				return true;
+			}
+		}
+		DAOService.getInstance().closeConnection();
+		return false;
+	}
+	
+	public boolean controlloRegistrazione(String email) throws ClassNotFoundException, SQLException {
 		String query = "SELECT EMAIL FROM CLIENTI WHERE EMAIL = '" + email + "'";
 		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
 		ResultSet rs = stmt.executeQuery(query);
 		while (rs.next()) {
-
-			if (rs.getString("EMAIL").equals(email)) {
-				query = "SELECT PASSWORD FROM CLIENTI WHERE PASSWORD = '" + password + "'";
-				stmt.executeQuery(query);
-				if ( rs.getString("PASSWORD").equals(password) ) {
-					return true;
-				}
-				else {
-					return false;
-				}
+			if (rs.getString("EMAIL").equals("")) {
+				return true;
 			}
-		}
+		}		
 		DAOService.getInstance().closeConnection();
 		return false;
 	}
