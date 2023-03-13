@@ -16,6 +16,8 @@ public class ClienteController {
 	
 	DAOCliente clienteDAO = new DAOCliente();
 	ClienteView cv = new ClienteView();
+	Cliente cliente = null;
+
 
 	
 	public void insertCliente(Cliente cliente) {
@@ -56,17 +58,9 @@ public class ClienteController {
 		else {
 			return false;
 		}		
-	}
-	public void sceltaMenuCliente(int scelta) {// serve eccezione 
-		switch (scelta) {
-		case 1:
-			aquisto();
-			break;
-		}
-		
-	}
+	}	
 
-	private void aquisto() {
+	public void aquisto() {
 		try {
 			String risposta = "";
 			OrdineController oc = new OrdineController();
@@ -87,7 +81,7 @@ public class ClienteController {
 			cv.rispostaAggiuntaProdotto();
 			risposta = scanner.nextLine();
 		}while ( risposta.equalsIgnoreCase("s") );
-		oc.insertOrdine(null);
+		oc.insertOrdine(cliente);
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -96,7 +90,7 @@ public class ClienteController {
 		}
 	}
 	
-	public boolean controllaAccesso(String email, String password) {
+	private boolean logIn(String email, String password) {
 		try {
 			return clienteDAO.controllaAccesso(email, password);
 		} catch (ClassNotFoundException e) {
@@ -108,6 +102,7 @@ public class ClienteController {
 	}
 
 	public void accessoCliente() {
+		ProgrammaController pc = new ProgrammaController();
 		String email = "";
 		String password = "";		
 		do {
@@ -115,27 +110,19 @@ public class ClienteController {
 			email = scanner.nextLine();
 			cv.messaggioVerificaPassword();
 			password = scanner.nextLine();
-			if ( !controllaAccesso(email, password)) {
+			if ( !logIn(email, password)) {
 				cv.messaggioCredenzialiErrate();
 			}
-		}while (!controllaAccesso(email, password));
-		cv.messaggioCredenzialiEsatte();
-		apriMenuCliente();
-	}
-	
-	public void apriMenuCliente() {
-		cv.menuCliente();
-		controllaSceltaMenuCliente();
-	}
-	
-	public void controllaSceltaMenuCliente() {
-		int scelta = scanner.nextInt();		
-		while ( scelta < 0 || scelta > 2 ) {
-			cv.erroreSceltaMenuCliente();
-			scelta = scanner.nextInt();
+		}while (!logIn(email, password));
+		try {
+			cliente = clienteDAO.getCliente(email);
+			cv.messaggioCredenzialiEsatte();
+			pc.apriMenuCliente();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		sceltaMenuCliente(scelta);		
-	}
-	
-	
+		
+	}	
 }

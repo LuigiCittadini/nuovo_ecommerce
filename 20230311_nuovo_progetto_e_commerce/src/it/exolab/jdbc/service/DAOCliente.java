@@ -89,4 +89,21 @@ public class DAOCliente {
 		DAOService.getInstance().closeConnection();
 		return false;
 	}
+	
+	public Cliente getCliente(String mail) throws ClassNotFoundException, SQLException {
+		String query = "SELECT * FROM CLIENTI WHERE EMAIL = '" + mail + "'";
+		// creo lo statement che contiene la query e la connessione
+		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
+		// lancio la query
+		ResultSet rs = stmt.executeQuery(query);
+		rs.next();
+		String cliente_id = rs.getString("CLIENTE_ID");
+		String nome = rs.getString("NOME");
+		String cognome = rs.getString("COGNOME");
+		String email = rs.getString("EMAIL");
+		String indirizzo = rs.getString("INDIRIZZO");
+		String password = rs.getString("PASSWORD");
+		Cliente cliente = new Cliente(cliente_id, nome, cognome, email, indirizzo, password);
+		return cliente;
+	}
 }
