@@ -7,13 +7,13 @@ import it.exolab.jdbc.service.DAOCliente;
 
 public class ClienteController {
 	
+	DAOCliente clienteDAO = new DAOCliente();
 	
 	public void insertCliente(Cliente cliente) {
 
 		//questo metodo inserisce un cliente nel database e da un codice id casuale ad esso
 		
 		String codiceId;
-		DAOCliente clienteDAO = new DAOCliente();
 		try {
 			do {
 				codiceId = "";
@@ -25,7 +25,7 @@ public class ClienteController {
 					int secondaParte = (int)(Math.random() * 10 );
 					codiceId += secondaParte;
 				}			
-			}while( !clienteDAO.controllaId(codiceId) );
+			}while( clienteDAO.controllaId(codiceId) );
 			cliente.setClienteId(codiceId);
 			clienteDAO.insertCliente(cliente);
 		} catch (ClassNotFoundException e) {
@@ -33,5 +33,16 @@ public class ClienteController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
+	}
+	
+	public boolean controllaAccesso(String email, String password) {
+		try {
+			return clienteDAO.controllaAccesso(email, password);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

@@ -10,22 +10,24 @@ import it.exolab.jdbc.model.OggettiOrdine;
 
 public class DAOOggettiOrdine {
 
-	public void insertOggettiOrdine(OggettiOrdine oggettoOrdine) throws ClassNotFoundException, SQLException {
+	public void insertOggettiOrdine(ArrayList<OggettiOrdine> oggettiOrdine) throws ClassNotFoundException, SQLException {
 
 		String query = "INSERT INTO OGGETTI_ORDINE(NUM_ORDINE, OGGETTO#, PRODOTTO_ID, NUM_PRODOTTI, COSTO_TOT)" + "values(?,?,?,?,?)";
 		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
-		stmt.setInt(1, oggettoOrdine.getNumeroOrdine());
-		stmt.setInt(2, oggettoOrdine.getNumerooOggetto());
-		stmt.setString(3, oggettoOrdine.getProdottoId());
-		stmt.setInt(4, oggettoOrdine.getNumeroProdotti());
-		stmt.setDouble(5, oggettoOrdine.getCostoTotale());
-		stmt.execute();
+		for ( OggettiOrdine oggettoOrdine : oggettiOrdine ) {
+			stmt.setInt(1, oggettoOrdine.getNumeroOrdine());
+			stmt.setInt(2, oggettoOrdine.getNumerooOggetto());
+			stmt.setString(3, oggettoOrdine.getProdottoId());
+			stmt.setInt(4, oggettoOrdine.getNumeroProdotti());
+			stmt.setDouble(5, oggettoOrdine.getCostoTotale());
+			stmt.execute();			
+		}
 		DAOService.getInstance().closeConnection();
 	}
 	
 	public List<OggettiOrdine> findAllOggettiOrdine() throws ClassNotFoundException, SQLException {
 		List<OggettiOrdine> listaOrdini = new ArrayList<OggettiOrdine>();
-		String query = "SELEC * FROM OGGETTI_ORDINE";
+		String query = "SELECT * FROM OGGETTI_ORDINE";
 
 		// creo lo statement che contiene la query e la connessione
 

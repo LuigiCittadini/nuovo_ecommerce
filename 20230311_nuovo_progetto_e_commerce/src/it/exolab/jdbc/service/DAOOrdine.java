@@ -55,7 +55,9 @@ public class DAOOrdine {
 		
 		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
 		ResultSet rs = stmt.executeQuery(query);
-		return rs.getInt("NUM_ORDINE");		
+		rs.next();
+		return rs.getInt("MAX(NUM_ORDINE)");
+		
 	}	
 	
 }

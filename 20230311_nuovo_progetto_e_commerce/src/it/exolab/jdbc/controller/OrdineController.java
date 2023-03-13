@@ -15,7 +15,7 @@ public class OrdineController {
 	
 	private ArrayList<OggettiOrdine> lista = new ArrayList<>();
 	private int numOrdine;
-	private int numOggetto;
+	private int numOggetto = 1;
 	
 	private int getNumOrdine() {
 		
@@ -37,7 +37,7 @@ public class OrdineController {
 	}
 	
 	public void insertOggetti ( Prodotto prodotto, int quantita ) {
-		OggettiOrdine oggettiOrdine = new OggettiOrdine(getNumOrdine(), numOggetto + 1, prodotto.getProdottoId(),
+		OggettiOrdine oggettiOrdine = new OggettiOrdine(getNumOrdine(), numOggetto++, prodotto.getProdottoId(),
 				quantita, quantita*prodotto.getPrezzo());
 		lista.add(oggettiOrdine);
 		
@@ -68,6 +68,8 @@ public class OrdineController {
 		DAOOrdine ordineDAO = new DAOOrdine();
 		try {			
 			ordineDAO.insertOrdine(ordine);
+			OggettiOrdineController ooc = new OggettiOrdineController();
+			ooc.salvaLista(lista);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

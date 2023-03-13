@@ -13,7 +13,7 @@ import it.exolab.jdbc.model.Cliente;
 public class DAOCliente {
 
 	public void insertCliente(Cliente cliente) throws ClassNotFoundException, SQLException {
-		String query = "INSERT INTO CLIENTI(CLIENTE_ID, NOME, COGNOME, EMAIL, INDIRIZZO, PASSWORS)"
+		String query = "INSERT INTO CLIENTI(CLIENTE_ID, NOME, COGNOME, EMAIL, INDIRIZZO, PASSWORD)"
 				+ "values(?,?,?,?,?,?)";
 		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
 		stmt.setString(1, cliente.getClienteId());
@@ -48,15 +48,40 @@ public class DAOCliente {
 
 	public boolean controllaId(String codiceId) throws ClassNotFoundException, SQLException {
 
-		String query = "SELECT CLIENTE_ID FROM CLIENTI WHERE CLIENTE_ID =" + codiceId;
+		String query = "SELECT CLIENTE_ID FROM CLIENTI WHERE CLIENTE_ID = '" + codiceId + "'";
 		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
 		ResultSet rs = stmt.executeQuery(query);
+
+		while (rs.next()) {
+
+			if (rs.getString("CLIENTE_ID").equalsIgnoreCase("")) {
+				DAOService.getInstance().closeConnection();
+				return true;
+			}
+		}
+		DAOService.getInstance().closeConnection();
+		return false;
+	}
+	
+	public boolean controllaAccesso(String email, String password) throws ClassNotFoundException, SQLException {
 		
-		if ( rs.getString("CLIENTE_ID").equalsIgnoreCase("") ) {
-			return true;
+		String query = "SELECT EMAIL FROM CLIENTI WHERE EMAIL = '" + email + "'";
+		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
+		ResultSet rs = stmt.executeQuery(query);
+		while (rs.next()) {
+
+			if (rs.getString("EMAIL").equals(email)) {
+				query = "SELECT PASSWORD FROM CLIENTI WHERE PASSWORD = '" + password + "'";
+				stmt.executeQuery(query);
+				if ( rs.getString("PASSWORD").equals(password) ) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
 		}
-		else {
-			return false;
-		}
+		DAOService.getInstance().closeConnection();
+		return false;
 	}
 }
