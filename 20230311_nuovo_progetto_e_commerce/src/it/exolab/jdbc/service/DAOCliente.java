@@ -43,6 +43,7 @@ public class DAOCliente {
 			Cliente cliente = new Cliente(cliente_id, nome, cognome, email, indirizzo, password);
 			listaClienti.add(cliente);
 		}
+		DAOService.getInstance().closeConnection();
 		return listaClienti;
 	}
 
@@ -104,6 +105,7 @@ public class DAOCliente {
 		String indirizzo = rs.getString("INDIRIZZO");
 		String password = rs.getString("PASSWORD");
 		Cliente cliente = new Cliente(cliente_id, nome, cognome, email, indirizzo, password);
+		DAOService.getInstance().closeConnection();
 		return cliente;
 	}
 }

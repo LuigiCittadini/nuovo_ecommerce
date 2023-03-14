@@ -44,6 +44,7 @@ public class DAOOrdine {
 			Ordine ordine = new Ordine(num_ordine, cliente_id, stato, saldo);
 			listaOrdini.add(ordine);
 		}
+		DAOService.getInstance().closeConnection();
 		return listaOrdini;
 	}	
 	
@@ -56,6 +57,7 @@ public class DAOOrdine {
 		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
 		ResultSet rs = stmt.executeQuery(query);
 		rs.next();
+		DAOService.getInstance().closeConnection();
 		return rs.getInt("MAX(NUM_ORDINE)");
 		
 	}	

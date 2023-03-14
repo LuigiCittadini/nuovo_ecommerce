@@ -45,6 +45,7 @@ public class DAOOggettiOrdine {
 			OggettiOrdine oggettiOrdine = new OggettiOrdine(numOrdine, numOggetto, prodottoId, numProdotti,costoTot);
 			listaOrdini.add(oggettiOrdine);
 		}
+		DAOService.getInstance().closeConnection();
 		return listaOrdini;
 	}
 

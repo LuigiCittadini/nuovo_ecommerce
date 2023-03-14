@@ -44,6 +44,7 @@ public class DAOProdotto {
 			Prodotto prodotto = new Prodotto(prodottoId, descrizione, quantita, prezzo, collocazione);
 			listaProdotti.add(prodotto);
 		}
+		DAOService.getInstance().closeConnection();
 		return listaProdotti;
 	}
 	
