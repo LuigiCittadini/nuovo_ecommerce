@@ -58,8 +58,7 @@ public class DAOOrdine {
 		ResultSet rs = stmt.executeQuery(query);
 		rs.next();
 		DAOService.getInstance().closeConnection();
-		return rs.getInt("MAX(NUM_ORDINE)");
-		
+		return rs.getInt("MAX(NUM_ORDINE)");		
 	}	
 	
 }

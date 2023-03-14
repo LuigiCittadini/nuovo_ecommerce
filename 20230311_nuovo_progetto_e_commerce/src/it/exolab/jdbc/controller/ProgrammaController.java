@@ -16,6 +16,11 @@ public class ProgrammaController {
 	public void start() {
 	pv.menu();
 	int scelta = scanner.nextInt();
+	
+	while ( scelta < 0 || scelta > 3 ) {
+		cv.erroreSceltaMenuCliente();
+		scelta = scanner.nextInt();
+	} 
 	scelta(scelta);	
 	}
 	
@@ -30,6 +35,11 @@ public class ProgrammaController {
 			break;
 		case 3: 
 			cc.registrazione();
+			break;
+		case 0:
+			System.exit(0);
+			break;
+			
 		}
 	}
 	public void sceltaMenuCliente(int scelta) {// serve eccezione 
@@ -37,7 +47,10 @@ public class ProgrammaController {
 		case 1:
 			cc.aquisto();
 			break;
-		}		
+		case 2:
+			cc.visualizzaStatoOrdine();
+			break;
+		}
 	}
 	public void apriMenuCliente() {
 		cv.menuCliente();

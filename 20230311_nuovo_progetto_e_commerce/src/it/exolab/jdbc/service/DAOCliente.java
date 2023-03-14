@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.exolab.jdbc.controller.OrdineController;
 import it.exolab.jdbc.model.Cliente;
+import it.exolab.jdbc.model.Ordine;
+import it.exolab.jdbc.model.Stato;
 
 // classe per mandare le query al database, sia in inserimento che in lettura
 public class DAOCliente {
@@ -107,5 +110,29 @@ public class DAOCliente {
 		Cliente cliente = new Cliente(cliente_id, nome, cognome, email, indirizzo, password);
 		DAOService.getInstance().closeConnection();
 		return cliente;
+	}
+	
+	public List<Ordine> findOrdinePerCliente(String codiceCliente) throws ClassNotFoundException, SQLException {
+		
+		List<Ordine> listaOrdini = new ArrayList<Ordine>();
+		
+		String query = "SELECT * FROM ORDINI WHERE CLIENTE_ID = '" + codiceCliente + "'";
+		
+		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);
+		// lancio la query
+		ResultSet rs = stmt.executeQuery(query);
+		
+		while (rs.next()) {
+			int numOrdine = rs.getInt("NUM_ORDINE");
+			String clienteId = rs.getString("CLIENTE_ID");
+			String st = rs.getString("STATO");
+			Stato stato = OrdineController.convertiStatoOrdine(st);
+			double saldo = rs.getDouble("SALDO");
+			Ordine ordini = new Ordine(numOrdine, clienteId, stato, saldo);
+			listaOrdini.add(ordini);
+		}
+		DAOService.getInstance().closeConnection();
+		return listaOrdini;
+		
 	}
 }

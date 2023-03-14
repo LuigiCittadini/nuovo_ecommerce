@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import it.exolab.jdbc.model.Cliente;
+import it.exolab.jdbc.model.Ordine;
 import it.exolab.jdbc.model.Prodotto;
 import it.exolab.jdbc.service.DAOCliente;
 import it.exolab.jdbc.service.DAOProdotto;
@@ -16,6 +17,7 @@ public class ClienteController {
 	
 	DAOCliente clienteDAO = new DAOCliente();
 	ClienteView cv = new ClienteView();
+	DAOProdotto prodottoDAO = new DAOProdotto(); 
 	static Cliente cliente = null;
 
 
@@ -86,7 +88,6 @@ public class ClienteController {
 		try {
 			String risposta = "";
 			OrdineController oc = new OrdineController();
-			DAOProdotto prodottoDAO = new DAOProdotto(); 
 		do {
 			List<Prodotto> lista = prodottoDAO.findAllProdotti();
 			cv.scegliProdotto(lista);
@@ -106,6 +107,17 @@ public class ClienteController {
 		}while ( risposta.equalsIgnoreCase("s") );
 		oc.insertOrdine(cliente);
 			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void visualizzaStatoOrdine() {
+		
+		try {
+			List<Ordine> lista = clienteDAO.findOrdinePerCliente(cliente.getClienteId());
+			cv.stampaOrdini(lista);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

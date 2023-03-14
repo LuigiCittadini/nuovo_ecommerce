@@ -6,6 +6,7 @@ import java.util.Scanner;
 import it.exolab.jdbc.controller.ClienteController;
 import it.exolab.jdbc.controller.OrdineController;
 import it.exolab.jdbc.model.Cliente;
+import it.exolab.jdbc.model.Ordine;
 import it.exolab.jdbc.model.Prodotto;
 
 public class ClienteView {
@@ -65,8 +66,6 @@ public class ClienteView {
 		
 
 	public void scegliProdotto(List<Prodotto> models) {	
-		
-		OrdineController oc = new OrdineController();
 		int i = 0;
 		for (Prodotto model : models) {
 			System.out.print((++i) + " - ");
@@ -91,6 +90,14 @@ public class ClienteView {
 	}
 	public void rispostaAggiuntaProdotto() {
 		System.out.println("VUOI AQUISTARE UN ALTRO PRODOTTO? DIGITA s/n");		
+	}
+	
+public void stampaOrdini(List<Ordine> models) {
+		for (Ordine model : models) {
+			System.out.print("ORDINE: ");
+			System.out.print(model.getNumOrdine() + "  -  STATO: ");
+			System.out.println(model.getStato() + " ");			
+		}		
 	}
 
 }
