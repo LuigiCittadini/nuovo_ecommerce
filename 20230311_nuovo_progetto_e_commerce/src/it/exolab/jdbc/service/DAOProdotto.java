@@ -65,20 +65,17 @@ public class DAOProdotto {
 	
 	public void aggiornaQuantita(String codiceProdotto, int quantitaDaSottrarre) throws ClassNotFoundException, SQLException {
 		
-		String query = "SELECT QUANTITA FROM PRODOTTI WHERE PRODOTTO_ID = " + codiceProdotto + "'";
+		String query = "SELECT QUANTITA FROM PRODOTTI WHERE PRODOTTO_ID = '" + codiceProdotto + "'";
 		PreparedStatement stmt = DAOService.getInstance().getConnection().prepareStatement(query);	
 		ResultSet rs = stmt.executeQuery(query);
 		while (rs.next()) {
-			String prodottoId = rs.getString("PRODOTTO_ID");
-			String descrizione = rs.getString("DESCRIZIONE");
 			int quantita = rs.getInt("QUANTITA");
-			double prezzo = rs.getDouble("PREZZO");
-			String collocazione = rs.getString("COLLOCAZIONE");
-			Prodotto prodotto = new Prodotto(prodottoId, descrizione, quantita, prezzo, collocazione);		}
-		
-		query = "UPDATE PRODOTTO SET QUANTITA WHERE PRODOTTO_ID = '" + codiceProdotto + "'";
+			
+		query = "UPDATE PRODOTTI SET QUANTITA = " + (quantita - quantitaDaSottrarre) + "WHERE PRODOTTO_ID = '" + codiceProdotto + "'";
 		stmt = DAOService.getInstance().getConnection().prepareStatement(query);
+		}
 		rs = stmt.executeQuery(query);
+		DAOService.getInstance().closeConnection();
 	}
 
 }

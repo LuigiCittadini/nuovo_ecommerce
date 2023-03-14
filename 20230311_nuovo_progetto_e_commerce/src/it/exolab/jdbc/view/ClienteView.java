@@ -30,7 +30,6 @@ public class ClienteView {
 	}
 	
 	public void menuCliente() {
-		ClienteController cc = new ClienteController();
 		System.out.println("1 - ORDINA PRODOTTI");
 		System.out.println("2 - VISUALIZZA ORDINE");
 		System.out.println("0 - INDIETRO");		

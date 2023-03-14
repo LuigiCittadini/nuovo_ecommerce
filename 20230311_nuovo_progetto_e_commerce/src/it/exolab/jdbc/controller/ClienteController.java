@@ -16,7 +16,7 @@ public class ClienteController {
 	
 	DAOCliente clienteDAO = new DAOCliente();
 	ClienteView cv = new ClienteView();
-	Cliente cliente = null;
+	static Cliente cliente = null;
 
 
 	
@@ -78,6 +78,7 @@ public class ClienteController {
 			}
 			scanner.nextLine();
 			oc.insertOggetti(lista.get(indice - 1), quantita);
+			prodottoDAO.aggiornaQuantita(lista.get(indice - 1).getProdottoId(), quantita);
 			cv.rispostaAggiuntaProdotto();
 			risposta = scanner.nextLine();
 		}while ( risposta.equalsIgnoreCase("s") );
@@ -100,6 +101,7 @@ public class ClienteController {
 		}
 		return false;
 	}
+	
 
 	public void accessoCliente() {
 		ProgrammaController pc = new ProgrammaController();
@@ -118,6 +120,7 @@ public class ClienteController {
 			cliente = clienteDAO.getCliente(email);
 			cv.messaggioCredenzialiEsatte();
 			pc.apriMenuCliente();
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
