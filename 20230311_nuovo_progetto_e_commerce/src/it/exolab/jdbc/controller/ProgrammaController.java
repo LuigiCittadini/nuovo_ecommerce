@@ -15,6 +15,8 @@ public class ProgrammaController {
 	
 	public void start() {
 	pv.menu();
+	int scelta = scanner.nextInt();
+	scelta(scelta);	
 	}
 	
 	public void scelta(int scelta) {
@@ -27,7 +29,7 @@ public class ProgrammaController {
 			
 			break;
 		case 3: 
-			cv.registrazione();
+			cc.registrazione();
 		}
 	}
 	public void sceltaMenuCliente(int scelta) {// serve eccezione 

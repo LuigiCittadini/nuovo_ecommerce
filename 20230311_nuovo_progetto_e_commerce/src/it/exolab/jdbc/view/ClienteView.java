@@ -39,27 +39,30 @@ public class ClienteView {
 		System.out.println("SCELTA ERRATA. DIGITA UNA SCELTA CORRETTA");
 	}
 	
-	public void registrazione() {
-		ClienteController cc = new ClienteController();
+	// form registrazione:
+	
+	public void inserisciEmail() {
 		System.out.println("INSERISCI LA TUA EMAIL");
-		String email = scanner.nextLine();
-		if ( cc.verificaEmail(email)) {
-			System.out.println("INSERISCI NOME");
-			String nome = scanner.nextLine();
-			System.out.println("INSERISCI COGNOME");
-			String cognome = scanner.nextLine();
-			System.out.println("INSERISCI INDIRIZZO");
-			String indirizzo = scanner.nextLine();
-			System.out.println("INSERISCI PASSWORD");
-			String password = scanner.nextLine();
-			Cliente cliente = new Cliente (null, nome, cognome, email, indirizzo, password);
-			cc.insertCliente(cliente);
-			System.out.println("ISCRIZIONE AVVENUTA CON SUCCESSO");
-		}
-		else {
-			System.out.println("EMAIL NON VALIDA O GIA UTILIZZATA");
-		}		
-	}	
+	}
+	public void inserisciNome() {
+		System.out.println("INSERISCI NOME");
+	}
+	public void inserisciCognome() {
+		System.out.println("INSERISCI COGNOME");
+	}
+	public void inserisciIndirizzo() {
+		System.out.println("INSERISCI INDIRIZZO");
+	}
+	public void inserisciPassword() {
+		System.out.println("INSERISCI PASSWORD");
+	}
+	public void esitoIscrizionePositivo() {
+		System.out.println("ISCRIZIONE AVVENUTA CON SUCCESSO");
+	}
+	public void esitoIscrizioneNegativo() {
+		System.out.println("EMAIL NON VALIDA O GIA UTILIZZATA");
+	}
+		
 
 	public void scegliProdotto(List<Prodotto> models) {	
 		

@@ -52,11 +52,33 @@ public class ClienteController {
 		if ( email.contains("@") &&
 				email.indexOf('@') == email.lastIndexOf('@')  &&
 				email.substring(0, email.indexOf('@')).length() - 1 > 0  && 				
-				email.substring(email.indexOf('@')).indexOf('.') > 0 ){
+				email.substring(email.indexOf('@')).indexOf('.') > 0 &&
+				email.substring(email.lastIndexOf('.')).length() > 1){
 			return true;			
 		}
 		else {
 			return false;
+		}		
+	}
+	
+	public void registrazione() {
+		cv.inserisciEmail();
+		String email = scanner.nextLine();
+		if ( verificaEmail(email)) {
+			cv.inserisciNome();
+			String nome = scanner.nextLine();
+			cv.inserisciCognome();
+			String cognome = scanner.nextLine();
+			cv.inserisciIndirizzo();
+			String indirizzo = scanner.nextLine();
+			cv.inserisciPassword();
+			String password = scanner.nextLine();
+			Cliente cliente = new Cliente (null, nome, cognome, email, indirizzo, password);
+			insertCliente(cliente);
+			cv.esitoIscrizionePositivo();
+		}
+		else {
+			cv.esitoIscrizioneNegativo();
 		}		
 	}	
 
